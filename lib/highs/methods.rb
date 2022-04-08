@@ -54,24 +54,27 @@ module Highs
 
       col_value = DoubleArray.new(num_col)
       row_value = DoubleArray.new(num_row)
-      model_status = IntArray.new(1)
 
-      check_status FFI.Highs_mipCall(
-        num_col, num_row, num_nz, a_format, sense, offset,
+      model = FFI.Highs_create
+      check_status FFI.Highs_setBoolOptionValue(model, "output_flag", 0)
+      check_status FFI.Highs_passMip(
+        model, num_col, num_row, num_nz, a_format, sense, offset,
         DoubleArray.new(num_col, col_cost), DoubleArray.new(num_col, col_lower), DoubleArray.new(num_col, col_upper),
         DoubleArray.new(num_row, row_lower), DoubleArray.new(num_row, row_upper),
         IntArray.new(a_start_size, a_start), IntArray.new(num_nz, a_index), DoubleArray.new(num_nz, a_value),
-        IntArray.new(num_col, integrality),
-        col_value,
-        row_value,
-        model_status
+        IntArray.new(num_col, integrality)
       )
+      check_status FFI.Highs_run(model)
+      check_status FFI.Highs_getSolution(model, col_value, nil, row_value, nil)
+      model_status = FFI.Highs_getModelStatus(model)
 
       {
-        status: FFI::MODEL_STATUS[model_status.to_a.first],
+        status: FFI::MODEL_STATUS[model_status],
         col_value: col_value.to_a,
         row_value: row_value.to_a
       }
+    ensure
+      FFI.Highs_destroy(model) if model
     end
 
     def qp_call(sense:, offset: 0, col_cost:, col_lower:, col_upper:, row_lower:, row_upper:, a_format:, a_start:, a_index:, a_value:, q_format:, q_start:, q_index:, q_value:)
