@@ -17,6 +17,7 @@ class HighsTest < Minitest::Test
       )
 
     assert_equal :optimal, res[:status]
+    assert_in_delta 31.2, res[:obj_value]
     assert_elements_in_delta [2.4, 1.2], res[:col_value]
     assert_elements_in_delta [0, 0], res[:col_dual]
     assert_elements_in_delta [7.2, 12, 6], res[:row_value]
@@ -42,6 +43,7 @@ class HighsTest < Minitest::Test
       )
 
     assert_equal :optimal, res[:status]
+    assert_in_delta 32, res[:obj_value]
     assert_elements_in_delta [4, 0], res[:col_value]
     assert_elements_in_delta [8, 12, 8], res[:row_value]
   end
@@ -66,6 +68,7 @@ class HighsTest < Minitest::Test
       )
 
     assert_equal :optimal, res[:status]
+    assert_in_delta(-2.5, res[:obj_value])
     assert_elements_in_delta [0, 5, 0], res[:col_value]
     assert_elements_in_delta [0, 0, 0], res[:col_dual]
     assert_elements_in_delta [5, 0], res[:row_value]

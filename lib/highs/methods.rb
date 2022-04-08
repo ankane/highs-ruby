@@ -31,7 +31,7 @@ module Highs
 
       {
         status: FFI::MODEL_STATUS[model_status],
-        objective: FFI.Highs_getObjectiveValue(model),
+        obj_value: FFI.Highs_getObjectiveValue(model),
         col_value: col_value.to_a,
         col_dual: col_dual.to_a,
         row_value: row_value.to_a,
@@ -70,6 +70,7 @@ module Highs
 
       {
         status: FFI::MODEL_STATUS[model_status],
+        obj_value: FFI.Highs_getObjectiveValue(model),
         col_value: col_value.to_a,
         row_value: row_value.to_a
       }
@@ -112,6 +113,7 @@ module Highs
 
       {
         status: FFI::MODEL_STATUS[model_status],
+        obj_value: FFI.Highs_getObjectiveValue(model),
         col_value: col_value.to_a,
         col_dual: col_dual.to_a,
         row_value: row_value.to_a,
