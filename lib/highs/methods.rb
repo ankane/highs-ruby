@@ -95,22 +95,23 @@ module Highs
       row_dual = DoubleArray.new(num_row)
       col_basis = IntArray.new(num_col)
       row_basis = IntArray.new(num_row)
-      model_status = IntArray.new(1)
 
-      check_status FFI.Highs_qpCall(
-        num_col, num_row, num_nz, q_num_nz, a_format, q_format, sense, offset,
+      model = FFI.Highs_create
+      check_status FFI.Highs_setBoolOptionValue(model, "output_flag", 0)
+      check_status FFI.Highs_passModel(
+        model, num_col, num_row, num_nz, q_num_nz, a_format, q_format, sense, offset,
         DoubleArray.new(num_col, col_cost), DoubleArray.new(num_col, col_lower), DoubleArray.new(num_col, col_upper),
         DoubleArray.new(num_row, row_lower), DoubleArray.new(num_row, row_upper),
         IntArray.new(a_start_size, a_start), IntArray.new(num_nz, a_index), DoubleArray.new(num_nz, a_value),
-        IntArray.new(q_start_size, q_start), IntArray.new(q_num_nz, q_index), DoubleArray.new(q_num_nz, q_value),
-        col_value, col_dual,
-        row_value, row_dual,
-        col_basis, row_basis,
-        model_status
+        IntArray.new(q_start_size, q_start), IntArray.new(q_num_nz, q_index), DoubleArray.new(q_num_nz, q_value), nil
       )
+      check_status FFI.Highs_run(model)
+      check_status FFI.Highs_getSolution(model, col_value, col_dual, row_value, row_dual)
+      check_status FFI.Highs_getBasis(model, col_basis, row_basis)
+      model_status = FFI.Highs_getModelStatus(model)
 
       {
-        status: FFI::MODEL_STATUS[model_status.to_a.first],
+        status: FFI::MODEL_STATUS[model_status],
         col_value: col_value.to_a,
         col_dual: col_dual.to_a,
         row_value: row_value.to_a,
@@ -118,6 +119,8 @@ module Highs
         col_basis: col_basis.to_a.map { |v| FFI::BASIS_STATUS[v] },
         row_basis: row_basis.to_a.map { |v| FFI::BASIS_STATUS[v] }
       }
+    ensure
+      FFI.Highs_destroy(model) if model
     end
 
     private
