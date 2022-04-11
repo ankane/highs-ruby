@@ -33,6 +33,10 @@ module Highs
       }
     end
 
+    def write(filename)
+      check_status FFI.Highs_writeModel(@ptr, filename)
+    end
+
     def to_ptr
       @ptr
     end

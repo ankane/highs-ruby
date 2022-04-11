@@ -1,6 +1,6 @@
 module Highs
   module Methods
-    def lp_call(sense:, offset: 0, col_cost:, col_lower:, col_upper:, row_lower:, row_upper:, a_format:, a_start:, a_index:, a_value:)
+    def lp(sense:, offset: 0, col_cost:, col_lower:, col_upper:, row_lower:, row_upper:, a_format:, a_start:, a_index:, a_value:)
       num_col = col_cost.size
       num_row = row_lower.size
       num_nz = a_index.size
@@ -14,10 +14,14 @@ module Highs
         DoubleArray.new(num_row, row_lower), DoubleArray.new(num_row, row_upper),
         IntArray.new(a_start.size, a_start), IntArray.new(num_nz, a_index), DoubleArray.new(num_nz, a_value),
       )
-      model.solve
+      model
     end
 
-    def mip_call(sense:, offset: 0, col_cost:, col_lower:, col_upper:, row_lower:, row_upper:, a_format:, a_start:, a_index:, a_value:, integrality:)
+    def lp_call(**options)
+      lp(**options).solve
+    end
+
+    def mip(sense:, offset: 0, col_cost:, col_lower:, col_upper:, row_lower:, row_upper:, a_format:, a_start:, a_index:, a_value:, integrality:)
       num_col = col_cost.size
       num_row = row_lower.size
       num_nz = a_index.size
@@ -32,10 +36,14 @@ module Highs
         IntArray.new(a_start.size, a_start), IntArray.new(num_nz, a_index), DoubleArray.new(num_nz, a_value),
         IntArray.new(num_col, integrality)
       )
-      model.solve.slice(:status, :obj_value, :col_value, :row_value)
+      model
     end
 
-    def qp_call(sense:, offset: 0, col_cost:, col_lower:, col_upper:, row_lower:, row_upper:, a_format:, a_start:, a_index:, a_value:, q_format:, q_start:, q_index:, q_value:)
+    def mip_call(**options)
+      mip(**options).solve.slice(:status, :obj_value, :col_value, :row_value)
+    end
+
+    def qp(sense:, offset: 0, col_cost:, col_lower:, col_upper:, row_lower:, row_upper:, a_format:, a_start:, a_index:, a_value:, q_format:, q_start:, q_index:, q_value:)
       num_col = col_cost.size
       num_row = row_lower.size
       num_nz = a_index.size
@@ -52,7 +60,17 @@ module Highs
         IntArray.new(a_start.size, a_start), IntArray.new(num_nz, a_index), DoubleArray.new(num_nz, a_value),
         IntArray.new(q_start.size, q_start), IntArray.new(q_num_nz, q_index), DoubleArray.new(q_num_nz, q_value), nil
       )
-      model.solve
+      model
+    end
+
+    def qp_call(**options)
+      qp(**options).solve
+    end
+
+    def read(filename)
+      model = Model.new
+      check_status FFI.Highs_readModel(model, filename)
+      model
     end
 
     private
