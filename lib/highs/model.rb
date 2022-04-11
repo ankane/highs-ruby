@@ -4,11 +4,10 @@ module Highs
       @ptr = FFI.Highs_create
       ObjectSpace.define_finalizer(self, self.class.finalize(@ptr))
 
-      # TODO add option
       check_status FFI.Highs_setBoolOptionValue(@ptr, "output_flag", 0)
     end
 
-    def solve
+    def solve(verbose: false)
       num_col = FFI.Highs_getNumCol(@ptr)
       num_row = FFI.Highs_getNumRow(@ptr)
 
@@ -19,7 +18,9 @@ module Highs
       col_basis = IntArray.new(num_col)
       row_basis = IntArray.new(num_row)
 
-      check_status FFI.Highs_run(@ptr)
+      with_options(verbose: verbose) do
+        check_status FFI.Highs_run(@ptr)
+      end
       check_status FFI.Highs_getSolution(@ptr, col_value, col_dual, row_value, row_dual)
       check_status FFI.Highs_getBasis(@ptr, col_basis, row_basis)
       model_status = FFI.Highs_getModelStatus(@ptr)
@@ -53,6 +54,13 @@ module Highs
 
     def check_status(status)
       Highs.send(:check_status, status)
+    end
+
+    def with_options(verbose:)
+      check_status(FFI.Highs_setBoolOptionValue(@ptr, "output_flag", 1)) if verbose
+      yield
+    ensure
+      check_status(FFI.Highs_setBoolOptionValue(@ptr, "output_flag", 0)) if verbose
     end
   end
 end
