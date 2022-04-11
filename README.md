@@ -16,60 +16,81 @@ gem "highs"
 
 *The API is fairly low-level at the moment*
 
-Solve a linear program
+Load a linear program
 
 ```ruby
-Highs.lp_call(
-  sense: :minimize,
-  col_cost: [8, 10],
-  col_lower: [0, 0],
-  col_upper: [1e30, 1e30],
-  row_lower: [7, 12, 6],
-  row_upper: [1e30, 1e30, 1e30],
-  a_format: :colwise,
-  a_start: [0, 3],
-  a_index: [0, 1, 2, 0, 1, 2],
-  a_value: [2, 3, 2, 2, 4, 1]
-)
+model =
+  Highs.lp(
+    sense: :minimize,
+    col_cost: [8, 10],
+    col_lower: [0, 0],
+    col_upper: [1e30, 1e30],
+    row_lower: [7, 12, 6],
+    row_upper: [1e30, 1e30, 1e30],
+    a_format: :colwise,
+    a_start: [0, 3],
+    a_index: [0, 1, 2, 0, 1, 2],
+    a_value: [2, 3, 2, 2, 4, 1]
+  )
 ```
 
-Solve a mixed-integer program
+Load a mixed-integer program
 
 ```ruby
-Highs.mip_call(
-  sense: :minimize,
-  col_cost: [8, 10],
-  col_lower: [0, 0],
-  col_upper: [1e30, 1e30],
-  row_lower: [7, 12, 6],
-  row_upper: [1e30, 1e30, 1e30],
-  a_format: :colwise,
-  a_start: [0, 3],
-  a_index: [0, 1, 2, 0, 1, 2],
-  a_value: [2, 3, 2, 2, 4, 1],
-  integrality: [1, 1]
-)
+model =
+  Highs.mip(
+    sense: :minimize,
+    col_cost: [8, 10],
+    col_lower: [0, 0],
+    col_upper: [1e30, 1e30],
+    row_lower: [7, 12, 6],
+    row_upper: [1e30, 1e30, 1e30],
+    a_format: :colwise,
+    a_start: [0, 3],
+    a_index: [0, 1, 2, 0, 1, 2],
+    a_value: [2, 3, 2, 2, 4, 1],
+    integrality: [1, 1]
+  )
 ```
 
-Solve a quadratic program
+Load a quadratic program
 
 ```ruby
-Highs.qp_call(
-  sense: :minimize,
-  col_cost: [0, -1, 0],
-  col_lower: [0, 0, 0],
-  col_upper: [1e30, 1e30, 1e30],
-  row_lower: [1, -1e30],
-  row_upper: [1e30, 1e30],
-  a_format: :colwise,
-  a_start: [0, 1, 2],
-  a_index: [0, 0, 0],
-  a_value: [1, 1, 1],
-  q_format: :colwise,
-  q_start: [0, 2, 3],
-  q_index: [0, 2, 1, 0, 2],
-  q_value: [2, -1, 0.2, -1, 2]
-)
+model =
+  Highs.qp(
+    sense: :minimize,
+    col_cost: [0, -1, 0],
+    col_lower: [0, 0, 0],
+    col_upper: [1e30, 1e30, 1e30],
+    row_lower: [1, -1e30],
+    row_upper: [1e30, 1e30],
+    a_format: :colwise,
+    a_start: [0, 1, 2],
+    a_index: [0, 0, 0],
+    a_value: [1, 1, 1],
+    q_format: :colwise,
+    q_start: [0, 2, 3],
+    q_index: [0, 2, 1, 0, 2],
+    q_value: [2, -1, 0.2, -1, 2]
+  )
+```
+
+Solve
+
+```ruby
+model.solve
+```
+
+Write the program to an MPS file
+
+```ruby
+model.write("model.mps")
+```
+
+Read a program from an MPS file
+
+```ruby
+model = Highs.read("model.mps")
 ```
 
 ## History
