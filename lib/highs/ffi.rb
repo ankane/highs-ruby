@@ -56,5 +56,7 @@ module Highs
     extern "HighsInt Highs_getDualRay(void* highs, HighsInt* has_dual_ray, double* dual_ray_value)"
     extern "HighsInt Highs_getPrimalRay(void* highs, HighsInt* has_primal_ray, double* primal_ray_value)"
     extern "double Highs_getObjectiveValue(void* highs)"
+    extern "HighsInt Highs_getNumCol(void* highs)"
+    extern "HighsInt Highs_getNumRow(void* highs)"
   end
 end

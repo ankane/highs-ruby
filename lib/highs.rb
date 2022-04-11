@@ -4,6 +4,7 @@ require "fiddle/import"
 # modules
 require "highs/array"
 require "highs/methods"
+require "highs/model"
 require "highs/version"
 
 module Highs
