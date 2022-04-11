@@ -20,21 +20,21 @@ module Highs
       implicit_integer: 4
     }
 
-    MODEL_STATUS = [
-      :not_set, :load_error, :model_error, :presolve_error, :solve_error, :postsolve_error,
-      :model_empty, :optimal, :infeasible, :unbounded_or_infeasible, :unbounded,
-      :objective_bound, :objective_target, :time_limit, :iteration_limit, :unknown
-    ]
+    OBJ_SENSE = {
+      minimize: 1,
+      maximize: -1
+    }
 
     MATRIX_FORMAT = {
       colwise: 1,
       rowwise: 2
     }
 
-    OBJ_SENSE = {
-      minimize: 1,
-      maximize: -1
-    }
+    MODEL_STATUS = [
+      :not_set, :load_error, :model_error, :presolve_error, :solve_error, :postsolve_error,
+      :model_empty, :optimal, :infeasible, :unbounded_or_infeasible, :unbounded,
+      :objective_bound, :objective_target, :time_limit, :iteration_limit, :unknown
+    ]
 
     BASIS_STATUS = [:lower, :basic, :upper, :zero, :nonbasic]
 
