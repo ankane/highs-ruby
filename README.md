@@ -93,6 +93,14 @@ Read a program from an MPS file
 model = Highs.read("model.mps")
 ```
 
+## Reference
+
+Enable verbose logging [unreleased]
+
+```ruby
+model.solve(verbose: true)
+```
+
 ## History
 
 View the [changelog](https://github.com/ankane/highs-ruby/blob/master/CHANGELOG.md)
