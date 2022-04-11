@@ -12,6 +12,14 @@ module Highs
 
     # https://github.com/ERGO-Code/HiGHS/blob/master/src/interfaces/highs_c_api.h
 
+    VAR_TYPE = {
+      continuous: 0,
+      integer: 1,
+      semi_continuous: 2,
+      semi_integer: 3,
+      implicit_integer: 4
+    }
+
     MODEL_STATUS = [
       :not_set, :load_error, :model_error, :presolve_error, :solve_error, :postsolve_error,
       :model_empty, :optimal, :infeasible, :unbounded_or_infeasible, :unbounded,

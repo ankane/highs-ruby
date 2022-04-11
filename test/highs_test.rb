@@ -54,7 +54,7 @@ class HighsTest < Minitest::Test
         a_start: [0, 3],
         a_index: [0, 1, 2, 0, 1, 2],
         a_value: [2, 3, 2, 2, 4, 1],
-        integrality: [1, 1]
+        integrality: [:integer, :integer]
       )
 
     res = model.solve

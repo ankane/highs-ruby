@@ -27,6 +27,7 @@ module Highs
       num_nz = a_index.size
       a_format = FFI::MATRIX_FORMAT.fetch(a_format)
       sense = FFI::OBJ_SENSE.fetch(sense)
+      integrality = integrality.map { |v| FFI::VAR_TYPE[v] || v }
 
       model = Model.new
       check_status FFI.Highs_passMip(
