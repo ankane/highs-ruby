@@ -9,6 +9,9 @@ module Highs
     end
 
     def solve
+      num_col = FFI.Highs_getNumCol(@ptr)
+      num_row = FFI.Highs_getNumRow(@ptr)
+
       col_value = DoubleArray.new(num_col)
       col_dual = DoubleArray.new(num_col)
       row_value = DoubleArray.new(num_row)
@@ -47,14 +50,6 @@ module Highs
     end
 
     private
-
-    def num_col
-      FFI.Highs_getNumCol(@ptr)
-    end
-
-    def num_row
-      FFI.Highs_getNumRow(@ptr)
-    end
 
     def check_status(status)
       Highs.send(:check_status, status)
