@@ -41,7 +41,7 @@ class HighsTest < Minitest::Test
     assert_equal [:basic, :lower, :lower], res[:row_basis]
   end
 
-  def test_mip_call
+  def test_mip
     model =
       Highs.mip(
         sense: :minimize,
@@ -64,7 +64,7 @@ class HighsTest < Minitest::Test
     assert_elements_in_delta [8, 12, 8], res[:row_value]
   end
 
-  def test_qp_call
+  def test_qp
     model =
       Highs.qp(
         sense: :minimize,
