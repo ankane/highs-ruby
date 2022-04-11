@@ -118,4 +118,10 @@ class HighsTest < Minitest::Test
     assert_equal [:lower, :lower, :lower], res[:col_basis]
     assert_equal [:lower], res[:row_basis]
   end
+
+  def test_time_limit
+    model = Highs.read("test/support/lp.mps")
+    res = model.solve(time_limit: 0.000001)
+    assert_equal :time_limit, res[:status]
+  end
 end

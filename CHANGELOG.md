@@ -1,6 +1,6 @@
 ## 0.1.2 (unreleased)
 
-- Added `verbose` option to `solve` method
+- Added `verbose` and `time_limit` options to `solve` method
 - Added support for symbol integrality
 
 ## 0.1.1 (2022-04-10)

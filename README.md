@@ -101,6 +101,12 @@ Enable verbose logging [unreleased]
 model.solve(verbose: true)
 ```
 
+Set the time limit in seconds [unreleased]
+
+```ruby
+model.solve(time_limit: 30)
+```
+
 ## History
 
 View the [changelog](https://github.com/ankane/highs-ruby/blob/master/CHANGELOG.md)
