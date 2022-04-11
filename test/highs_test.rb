@@ -26,7 +26,7 @@ class HighsTest < Minitest::Test
     assert_equal [:basic, :basic], res[:col_basis]
     assert_equal [:basic, :lower, :lower], res[:row_basis]
 
-    path = "/tmp/model.mps"
+    path = "/tmp/lp.mps"
     model.write(path)
     model = Highs.read(path)
 
@@ -56,6 +56,16 @@ class HighsTest < Minitest::Test
         a_value: [2, 3, 2, 2, 4, 1],
         integrality: [1, 1]
       )
+
+    res = model.solve
+    assert_equal :optimal, res[:status]
+    assert_in_delta 32, res[:obj_value]
+    assert_elements_in_delta [4, 0], res[:col_value]
+    assert_elements_in_delta [8, 12, 8], res[:row_value]
+
+    path = "/tmp/mip.mps"
+    model.write(path)
+    model = Highs.read(path)
 
     res = model.solve
     assert_equal :optimal, res[:status]
@@ -92,5 +102,20 @@ class HighsTest < Minitest::Test
     assert_elements_in_delta [0, 0], res[:row_dual]
     assert_equal [:lower, :lower, :lower], res[:col_basis]
     assert_equal [:lower, :lower], res[:row_basis]
+
+    path = "/tmp/qp.mps"
+    model.write(path)
+    model = Highs.read(path)
+
+    res = model.solve
+    assert_equal :optimal, res[:status]
+    assert_in_delta(-2.5, res[:obj_value])
+    assert_elements_in_delta [0, 5, 0], res[:col_value]
+    assert_elements_in_delta [0, 0, 0], res[:col_dual]
+    # second row dropped since -infinity to infinity
+    assert_elements_in_delta [5], res[:row_value]
+    assert_elements_in_delta [0], res[:row_dual]
+    assert_equal [:lower, :lower, :lower], res[:col_basis]
+    assert_equal [:lower], res[:row_basis]
   end
 end
