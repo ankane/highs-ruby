@@ -1,4 +1,4 @@
-## 0.1.2 (unreleased)
+## 0.1.2 (2022-04-14)
 
 - Added `verbose` and `time_limit` options to `solve` method
 - Added support for symbol integrality

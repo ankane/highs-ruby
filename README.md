@@ -49,7 +49,7 @@ model =
     a_start: [0, 3],
     a_index: [0, 1, 2, 0, 1, 2],
     a_value: [2, 3, 2, 2, 4, 1],
-    integrality: [1, 1]
+    integrality: [:integer, :continuous]
   )
 ```
 
@@ -95,13 +95,13 @@ model = Highs.read("model.mps")
 
 ## Reference
 
-Enable verbose logging [unreleased]
+Enable verbose logging
 
 ```ruby
 model.solve(verbose: true)
 ```
 
-Set the time limit in seconds [unreleased]
+Set the time limit in seconds
 
 ```ruby
 model.solve(time_limit: 30)
