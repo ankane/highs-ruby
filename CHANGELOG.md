@@ -1,3 +1,7 @@
+## 0.1.3 (unreleased)
+
+- Updated HiGHS to 1.3.0
+
 ## 0.1.2 (2022-04-14)
 
 - Added `verbose` and `time_limit` options to `solve` method
