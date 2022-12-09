@@ -6,12 +6,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - ruby: 3.1
-          os: ubuntu-20.04
-        - ruby: "3.0"
-          os: ubuntu-18.04
-        - ruby: 2.7
-          os: macos-latest
+          - ruby: 3.1
+            os: ubuntu-20.04
+          - ruby: "3.0"
+            os: ubuntu-18.04
+          - ruby: 2.7
+            os: macos-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
