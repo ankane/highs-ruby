@@ -19,7 +19,7 @@ end
 Rake::Task["build"].enhance [:ensure_vendor]
 
 def version
-  "1.3.0"
+  "1.4.1"
 end
 
 def download_file(library, remote_lib, file, sha256)
@@ -55,13 +55,13 @@ end
 # https://github.com/JuliaBinaryWrappers/HiGHS_jll.jl/releases
 namespace :vendor do
   task :linux do
-    download_file("libhighs.so", "libhighs.so", "HiGHS.v#{version}.x86_64-linux-gnu-cxx11.tar.gz", "6cee1e126274c0da044e5b1ed724076e83859b0df65209a18c1cd6b38a0db831")
-    download_file("libhighs.arm64.so", "libhighs.so", "HiGHS.v#{version}.aarch64-linux-gnu-cxx11.tar.gz", "bda22d8a97f53a52a5a429823603729a5a069535de8b6a60c04ad99ad5852032")
+    download_file("libhighs.so", "libhighs.so", "HiGHS.v#{version}.x86_64-linux-gnu-cxx11.tar.gz", "aaa82b2dbb647a05e17a3af2068f5608199c4cd02327124b5292b7b7cd6fe64a")
+    download_file("libhighs.arm64.so", "libhighs.so", "HiGHS.v#{version}.aarch64-linux-gnu-cxx11.tar.gz", "1734390afee5c43149f6cb04dcf225112bf7b979e84850e2812c218259d7729e")
   end
 
   task :mac do
-    download_file("libhighs.dylib", "libhighs.dylib", "HiGHS.v#{version}.x86_64-apple-darwin.tar.gz", "5ba475ec05a4233f428f8d406d366d4795c759827e6949ee644e5714865534d7")
-    download_file("libhighs.arm64.dylib", "libhighs.dylib", "HiGHS.v#{version}.aarch64-apple-darwin.tar.gz", "cb8bb1a5dadb0c98e2bdcc2b9e63323e76eb35657e081a115c0eb3cb939cb159")
+    download_file("libhighs.dylib", "libhighs.dylib", "HiGHS.v#{version}.x86_64-apple-darwin.tar.gz", "30e0e0abbdf9edff9e374c05b48aa14ecad16369af694ec2b52c611f86f7092c")
+    download_file("libhighs.arm64.dylib", "libhighs.dylib", "HiGHS.v#{version}.aarch64-apple-darwin.tar.gz", "577dd4b2204042870f7d7b47c626205db44160456e8c0bc1fafc9c660ef693e1")
   end
 
   task :windows do
