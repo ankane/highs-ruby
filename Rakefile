@@ -40,7 +40,7 @@ def download_file(library, remote_lib, file, sha256)
     system "#{command} #{file}"
     dest = File.expand_path("vendor", __dir__)
 
-    FileUtils.cp("lib/#{remote_lib}", "#{dest}/#{library}")
+    FileUtils.cp(remote_lib, "#{dest}/#{library}")
     puts "Saved vendor/#{library}"
 
     if library.end_with?(".so")
@@ -55,17 +55,17 @@ end
 # https://github.com/JuliaBinaryWrappers/HiGHS_jll.jl/releases
 namespace :vendor do
   task :linux do
-    download_file("libhighs.so", "libhighs.so", "HiGHS.v#{version}.x86_64-linux-gnu-cxx11.tar.gz", "aaa82b2dbb647a05e17a3af2068f5608199c4cd02327124b5292b7b7cd6fe64a")
-    download_file("libhighs.arm64.so", "libhighs.so", "HiGHS.v#{version}.aarch64-linux-gnu-cxx11.tar.gz", "1734390afee5c43149f6cb04dcf225112bf7b979e84850e2812c218259d7729e")
+    download_file("libhighs.so", "lib/libhighs.so", "HiGHS.v#{version}.x86_64-linux-gnu-cxx11.tar.gz", "aaa82b2dbb647a05e17a3af2068f5608199c4cd02327124b5292b7b7cd6fe64a")
+    download_file("libhighs.arm64.so", "lib/libhighs.so", "HiGHS.v#{version}.aarch64-linux-gnu-cxx11.tar.gz", "1734390afee5c43149f6cb04dcf225112bf7b979e84850e2812c218259d7729e")
   end
 
   task :mac do
-    download_file("libhighs.dylib", "libhighs.dylib", "HiGHS.v#{version}.x86_64-apple-darwin.tar.gz", "30e0e0abbdf9edff9e374c05b48aa14ecad16369af694ec2b52c611f86f7092c")
-    download_file("libhighs.arm64.dylib", "libhighs.dylib", "HiGHS.v#{version}.aarch64-apple-darwin.tar.gz", "577dd4b2204042870f7d7b47c626205db44160456e8c0bc1fafc9c660ef693e1")
+    download_file("libhighs.dylib", "lib/libhighs.dylib", "HiGHS.v#{version}.x86_64-apple-darwin.tar.gz", "30e0e0abbdf9edff9e374c05b48aa14ecad16369af694ec2b52c611f86f7092c")
+    download_file("libhighs.arm64.dylib", "lib/libhighs.dylib", "HiGHS.v#{version}.aarch64-apple-darwin.tar.gz", "577dd4b2204042870f7d7b47c626205db44160456e8c0bc1fafc9c660ef693e1")
   end
 
   task :windows do
-    # download_file("libhighs.dll.a", "libhighs.dll.a", "HiGHS.v#{version}.x86_64-w64-mingw32-cxx11.tar.gz", "a0cfe41a88ee636c6eba019110bc4e9e21c59f376a7b6d2207aa4485c21998dd")
+    download_file("libhighs.dll", "bin/libhighs.dll", "HiGHS.v#{version}.x86_64-w64-mingw32-cxx11.tar.gz", "c520d1ee90056d2ab65cb36870e998273745c69109e57acf93644872bdbb8aad")
   end
 
   task all: [:linux, :mac, :windows]
