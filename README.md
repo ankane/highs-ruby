@@ -2,6 +2,8 @@
 
 [HiGHS](https://www.maths.ed.ac.uk/hall/HiGHS/) - linear optimization software - for Ruby
 
+Check out [Opt](https://github.com/ankane/opt) for a high-level interface
+
 [![Build Status](https://github.com/ankane/highs-ruby/workflows/build/badge.svg?branch=master)](https://github.com/ankane/highs-ruby/actions)
 
 ## Installation
