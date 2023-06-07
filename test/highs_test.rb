@@ -124,4 +124,10 @@ class HighsTest < Minitest::Test
     res = model.solve(time_limit: 0.000001)
     assert_equal :time_limit, res[:status]
   end
+
+  def test_copy
+    model = Highs.read("test/support/lp.mps")
+    model.dup
+    model.clone
+  end
 end

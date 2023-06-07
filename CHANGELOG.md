@@ -1,6 +1,7 @@
 ## 0.1.5 (unreleased)
 
 - Updated HiGHS to 1.5.1
+- Fixed error with `dup` and `clone`
 
 ## 0.1.4 (2022-12-08)
 
