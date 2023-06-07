@@ -2,7 +2,7 @@ module Highs
   class Model
     def initialize
       @ptr = FFI.Highs_create
-      ObjectSpace.define_finalizer(@ptr, self.class.finalize(@ptr.to_i))
+      @ptr.free = FFI["Highs_destroy"]
 
       check_status FFI.Highs_setBoolOptionValue(@ptr, "output_flag", 0)
     end
@@ -43,11 +43,6 @@ module Highs
 
     def to_ptr
       @ptr
-    end
-
-    def self.finalize(addr)
-      # must use proc instead of stabby lambda
-      proc { FFI.Highs_destroy(addr) }
     end
 
     private
