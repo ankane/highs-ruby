@@ -2,10 +2,10 @@
 require "fiddle/import"
 
 # modules
-require "highs/array"
-require "highs/methods"
-require "highs/model"
-require "highs/version"
+require_relative "highs/array"
+require_relative "highs/methods"
+require_relative "highs/model"
+require_relative "highs/version"
 
 module Highs
   class Error < StandardError; end
