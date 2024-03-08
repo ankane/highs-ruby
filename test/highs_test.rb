@@ -100,8 +100,8 @@ class HighsTest < Minitest::Test
     assert_elements_in_delta [0, 0, 0], res[:col_dual]
     assert_elements_in_delta [5, 0], res[:row_value]
     assert_elements_in_delta [0, 0], res[:row_dual]
-    assert_equal [:lower, :lower, :lower], res[:col_basis]
-    assert_equal [:lower, :lower], res[:row_basis]
+    assert_equal [:lower, :basic, :lower], res[:col_basis]
+    assert_equal [:nonbasic, :basic], res[:row_basis]
 
     path = "/tmp/qp.mps"
     model.write(path)
@@ -115,14 +115,14 @@ class HighsTest < Minitest::Test
     # second row dropped since -infinity to infinity
     assert_elements_in_delta [5], res[:row_value]
     assert_elements_in_delta [0], res[:row_dual]
-    assert_equal [:lower, :lower, :lower], res[:col_basis]
-    assert_equal [:lower], res[:row_basis]
+    assert_equal [:lower, :basic, :lower], res[:col_basis]
+    assert_equal [:nonbasic], res[:row_basis]
   end
 
   def test_time_limit
     model = Highs.read("test/support/lp.mps")
     res = model.solve(time_limit: 0.000001)
-    assert_equal :time_limit, res[:status]
+    assert_equal :not_set, res[:status]
   end
 
   def test_copy
