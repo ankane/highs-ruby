@@ -4,7 +4,7 @@
 
 Check out [Opt](https://github.com/ankane/opt) for a high-level interface
 
-[![Build Status](https://github.com/ankane/highs-ruby/workflows/build/badge.svg?branch=master)](https://github.com/ankane/highs-ruby/actions)
+[![Build Status](https://github.com/ankane/highs-ruby/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/highs-ruby/actions)
 
 ## Installation
 
