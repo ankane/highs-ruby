@@ -1,3 +1,7 @@
+## 0.2.1 (unreleased)
+
+- Updated HiGHS to 1.8.0
+
 ## 0.2.0 (2024-07-31)
 
 - Updated HiGHS to 1.7.2
