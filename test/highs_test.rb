@@ -122,7 +122,7 @@ class HighsTest < Minitest::Test
   def test_time_limit
     model = Highs.read("test/support/lp.mps")
     res = model.solve(time_limit: 0.000001)
-    assert_equal :not_set, res[:status]
+    assert_equal :time_limit, res[:status]
   end
 
   def test_copy
