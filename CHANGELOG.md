@@ -1,3 +1,7 @@
+## 0.2.2 (unreleased)
+
+- Fixed warning with Ruby 3.4
+
 ## 0.2.1 (2024-10-19)
 
 - Updated HiGHS to 1.8.0
