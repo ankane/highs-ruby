@@ -11,9 +11,9 @@ jobs:
           - ruby: 3.3
             os: ubuntu-22.04
           - ruby: 3.2
-            os: ubuntu-20.04
+            os: macos-15
           - ruby: 3.1
-            os: macos-latest
+            os: macos-13
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
