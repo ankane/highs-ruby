@@ -1,3 +1,7 @@
+## 0.2.5 (unreleased)
+
+- Fixed memory leak
+
 ## 0.2.4 (2025-03-20)
 
 - Updated HiGHS to 1.10.0

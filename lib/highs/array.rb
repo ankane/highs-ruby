@@ -6,7 +6,7 @@ module Highs
       @size = size
       @ptr =
         if value == NOT_SET
-          Fiddle::Pointer.malloc(size * self.class::SIZE)
+          Fiddle::Pointer.malloc(size * self.class::SIZE, Fiddle::RUBY_FREE)
         else
           if value.size != size
             # TODO add variable name to message
