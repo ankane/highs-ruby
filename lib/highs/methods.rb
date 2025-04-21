@@ -70,7 +70,7 @@ module Highs
 
     def read(filename)
       model = Model.new
-      check_status FFI.Highs_readModel(model, filename)
+      check_status FFI.Highs_readModel(model, +filename)
       model
     end
 

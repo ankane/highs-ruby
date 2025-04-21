@@ -4,7 +4,7 @@ module Highs
       @ptr = FFI.Highs_create
       @ptr.free = FFI["Highs_destroy"]
 
-      check_status FFI.Highs_setBoolOptionValue(@ptr, "output_flag", 0)
+      check_status FFI.Highs_setBoolOptionValue(@ptr, +"output_flag", 0)
     end
 
     def solve(verbose: false, time_limit: nil)
@@ -38,7 +38,7 @@ module Highs
     end
 
     def write(filename)
-      check_status FFI.Highs_writeModel(@ptr, filename)
+      check_status FFI.Highs_writeModel(@ptr, +filename)
     end
 
     def to_ptr
@@ -52,12 +52,12 @@ module Highs
     end
 
     def with_options(verbose:, time_limit:)
-      check_status(FFI.Highs_setBoolOptionValue(@ptr, "output_flag", 1)) if verbose
-      check_status(FFI.Highs_setDoubleOptionValue(@ptr, "time_limit", time_limit)) if time_limit
+      check_status(FFI.Highs_setBoolOptionValue(@ptr, +"output_flag", 1)) if verbose
+      check_status(FFI.Highs_setDoubleOptionValue(@ptr, +"time_limit", time_limit)) if time_limit
       yield
     ensure
-      check_status(FFI.Highs_setBoolOptionValue(@ptr, "output_flag", 0)) if verbose
-      check_status(FFI.Highs_setDoubleOptionValue(@ptr, "time_limit", Float::INFINITY)) if time_limit
+      check_status(FFI.Highs_setBoolOptionValue(@ptr, +"output_flag", 0)) if verbose
+      check_status(FFI.Highs_setDoubleOptionValue(@ptr, +"time_limit", Float::INFINITY)) if time_limit
     end
   end
 end
