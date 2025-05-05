@@ -1,4 +1,4 @@
-## 0.2.5 (unreleased)
+## 0.2.5 (2025-05-04)
 
 - Fixed memory leak
 
