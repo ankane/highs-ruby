@@ -19,7 +19,7 @@ end
 Rake::Task["build"].enhance [:ensure_vendor]
 
 def version
-  "1.10.0"
+  "1.11.0"
 end
 
 def download_file(library, remote_lib, file, sha256)
@@ -55,17 +55,17 @@ end
 # https://github.com/JuliaBinaryWrappers/HiGHS_jll.jl/releases
 namespace :vendor do
   task :linux do
-    download_file("libhighs.so", "lib/libhighs.so", "HiGHS.v#{version}.x86_64-linux-gnu-cxx11.tar.gz", "787ce6e3d2924b4a0d11ff9aec9ff5f7ae24c8d3b05c9c991e753d5cc720b273")
-    download_file("libhighs.arm64.so", "lib/libhighs.so", "HiGHS.v#{version}.aarch64-linux-gnu-cxx11.tar.gz", "20e530d55c0b0086407305412dac58da904481f4bc7449d548d9eec3238512f2")
+    download_file("libhighs.so", "lib/libhighs.so", "HiGHS.v#{version}.x86_64-linux-gnu-cxx11.tar.gz", "2e93fc61565295e67cc4e0e902f4cd3f2d3c6984799be66710159078c0ec3a4c")
+    download_file("libhighs.arm64.so", "lib/libhighs.so", "HiGHS.v#{version}.aarch64-linux-gnu-cxx11.tar.gz", "aab4feb8dbdf13706ed2b9d46af2625245d212ed7e1c370ff30076c9b4043bd2")
   end
 
   task :mac do
-    download_file("libhighs.dylib", "lib/libhighs.dylib", "HiGHS.v#{version}.x86_64-apple-darwin.tar.gz", "03f90161ff1309d3e82398a13fb5455435360d9e28540a333317199f54c91b4b")
-    download_file("libhighs.arm64.dylib", "lib/libhighs.dylib", "HiGHS.v#{version}.aarch64-apple-darwin.tar.gz", "11c1765c628a69482b3163b796948bcf7922207d9d539f8532d90e48059dccb5")
+    download_file("libhighs.dylib", "lib/libhighs.dylib", "HiGHS.v#{version}.x86_64-apple-darwin.tar.gz", "e35c969a7f62c762a5c6e2379b8d7d85914dbb786513c558c5e3a3cf340790ff")
+    download_file("libhighs.arm64.dylib", "lib/libhighs.dylib", "HiGHS.v#{version}.aarch64-apple-darwin.tar.gz", "f329379db8ab2e14f652b15af6fe0fabfa17674d289057367cd83469eff0dd8b")
   end
 
   task :windows do
-    download_file("libhighs.dll", "bin/libhighs.dll", "HiGHS.v#{version}.x86_64-w64-mingw32-cxx11.tar.gz", "ee44b15352420d2ecd5086affd60b39950f0f91c1ba7e3779f0b15695b632712")
+    download_file("libhighs.dll", "bin/libhighs.dll", "HiGHS.v#{version}.x86_64-w64-mingw32-cxx11.tar.gz", "8c59525eda77c981e2ce9e513282abe429d1cc2959fddaa67d36904953894a56")
   end
 
   task all: [:linux, :mac, :windows]
