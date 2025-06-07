@@ -1,4 +1,4 @@
-## 0.2.6 (unreleased)
+## 0.2.6 (2025-06-07)
 
 - Updated HiGHS to 1.11.0
 
