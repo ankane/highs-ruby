@@ -1,4 +1,4 @@
-## 0.3.0 (unreleased)
+## 0.3.0 (2026-06-28)
 
 - Updated HiGHS to 1.15.0
 - Dropped support for Ruby < 3.3
