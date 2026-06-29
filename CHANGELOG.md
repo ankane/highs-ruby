@@ -1,5 +1,6 @@
 ## 0.3.0 (unreleased)
 
+- Updated HiGHS to 1.15.0
 - Dropped support for Ruby < 3.3
 
 ## 0.2.6 (2025-06-07)
