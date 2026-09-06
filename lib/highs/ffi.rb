@@ -10,7 +10,7 @@ module Highs
       raise e
     end
 
-    # https://github.com/ERGO-Code/HiGHS/blob/master/src/interfaces/highs_c_api.h
+    # https://github.com/ERGO-Code/HiGHS/blob/master/highs/interfaces/highs_c_api.h
 
     VAR_TYPE = {
       continuous: 0,
